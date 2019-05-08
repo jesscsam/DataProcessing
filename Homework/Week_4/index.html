@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <link rel = "stylesheet" type = "text/css" href = "stylesheet.css" />
+        <script type="text/javascript" src="d3/d3.js"></script>
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="d3-tip.js"></script>
+
+        <script>
+        d3.select("head")
+          .append("title")
+          .text("Generated renewable energy per country");
+        d3.select("body")
+          .append("h1")
+          .text("Generated renewable energy per country in Europe")
+
+
+            //Width, height and scale
+            var w = 800;
+            var h = 500;
+            var padding = 50;
+            var kleinpadding = 30;
+
+            // initialize SVG
+            var svg = d3.select("body")
+                        .append("svg")
+                          .attr("width", w)
+                          .attr("height", h)
+
+            // load json
+            d3.json("/energy.json").then(function(data){
+
+              // define scales & axis
+              var yScale = d3.scaleLinear()
+                        .domain([0, d3.max(data, function(d) { return d['Value']; })])
+                        .range([0, h - 100]);
+
+              var yaxisScale = d3.scaleLinear()
+                                  .domain([0, d3.max(data, function(d) { return d['Value']; })])
+                                  .range([h - padding, 0]);
+
+              var y_axis = d3.axisLeft()
+                            .scale(yaxisScale);
+
+              var xScale = d3.scaleBand()
+                        .domain(['NLD', 'LUX', 'BEL', 'IRL', 'GBR', 'POL', 'FRA', 'SVK', 'CZE', 'HUN', 'GRC', 'DEU',
+                                      'ESP', 'SVN', 'ITA', 'EST', 'PRT', 'DNK', 'AUT', 'FIN', 'SWE', 'LVA'])
+                        .range([0, w])
+                        .paddingInner(0.05)
+                        .paddingOuter(2)
+
+              var x_axis = d3.axisBottom()
+                             .scale(xScale);
+
+              var tip = d3.tip()
+                          .attr('class', 'd3-tip')
+                           .offset([-10, 0])
+                           .html(function(d) {
+                             return "<span style='font-family:Arial'><strong>Renewable energy: </strong>" + d['Value'] + "%</span>";
+                           })
+
+              // create appropriate rectangles
+              svg.selectAll("rect")
+                  .data(data)
+                .enter()
+                  .append("rect")
+                  .attr("class", "bar")
+                  .attr("fill", function(d) {
+                    return "rgb(0," + (d['Value'] * 10) + ", 0)";
+                    })
+                  .attr("width", function(d) {
+                      return xScale.bandwidth()
+                    })
+                  .attr("height", function(d) {
+                      return yScale(d['Value'])
+                    })
+                  .attr("x", function(d) {
+                      return xScale(d['LOCATION']);
+                  })
+                  .attr("y", function(d) {
+                    return (h - padding) - yScale(d['Value']);
+                  })
+                  .on('mouseover', tip.show)
+                  .on('mouseout', tip.hide)
+
+                  svg.call(tip);
+
+                  svg.append("g")
+                      .call(x_axis)
+                      .attr("class", "x axis")
+                      .attr('transform', "translate(0," + (h - padding) + ")")
+
+
+                  svg.append("g")
+                     .attr("transform", "translate(" + padding + ",0)")
+                     .call(y_axis);
+
+                  svg.append("text")
+                     .attr("x", (w / 2))
+                     .attr("y", h - padding / 4)
+                     .attr("text-anchor", "middle")
+                     .style("font-size", "16px")
+                     .style("font-family", "Arial")
+                     .text("Country");
+
+                 svg.append("text")
+                    .attr("x", -250)
+                    .attr("y", 20)
+                    .attr("text-anchor", "middle")
+                    .attr('transform', 'rotate(-90)')
+                    .style("font-size", "16px")
+                    .style("font-family", "Arial")
+                    .text("% renewable energy");
+
+              });
+
+
+            d3.select("body")
+              .append("p")
+              .text("Amount of renewable energy generated per European country \
+                    in 2016, measured percentage of the national energy supply. Source: OECD");
+            d3.select("body")
+              .append("p")
+              .text("UvA Minor Programmeren - Jessica Sam, 10752498");
+
+        </script>
+      </script>
+    </body>
+</html>
