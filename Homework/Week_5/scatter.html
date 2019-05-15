@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <script type="text/javascript" src="d3.js"></script>
+  <script src="d3-tip.js"></script>
+
+  <title>D3 Scatterplot</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+    <div class="container">
+      <p class="navbar-brand" href="#">Minor Programmeren, Data Processing</p>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+            <p class="nav-link">Jessica Sam</p>
+          </li>
+          <li class="nav-item">
+            <p class="nav-link">10752498</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h1 class="mt-5">D3 Scatterplot</h1>
+          <p>Correlation between amount of teen pregnancies and percentage of teens living in area's with violence. Source: OECD</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="text-center">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Year<span class="caret"></span>
+    </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a class="m" value="2012" href="#">2012</a></li>
+        <li><a class="m" value="2013" href="#">2013</a></li>
+        <li><a class="m" value="2014" href="#">2014</a></li>
+        <li><a class="m" value="2015" href="#">2015</a></li>
+        <li><a class="m" value="2016" href="#">2016</a></li>
+      </ul>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="transformdata1.js"></script>
+  <script src="transformdata2.js"></script>
+  <script src=scatter.js></script>
+
+  <div style="margin-bottom:200px"></div>
+
+</body>
+
+</html>
