@@ -7,6 +7,8 @@
 
     <!-- Import D3 V5 -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel = "stylesheet" type = "text/css" href="linkedviews.css"></link>
+    <script src="d3-tip.js"></script>
     <script>
       d3v5 = d3;
       window.d3 = null;
@@ -20,7 +22,22 @@
   </head>
 
   <body>
-    <div id="container" style="position: relative; width: 500px; height: 300px;"></div>
+    <h1 style="text-align: center">Number of athletes sent to the 2016 Olympics</h1>
+
+    <div style="width: 500px; margin: auto">
+        <p style="text-align: center">This map shows the number of athletes that each country has
+          sent to the 2016 Olympics. To view the amount and type of medals a country has acquired,
+          click on that country.</p>
+        <p style="text-align: center"> Author: Jessica Sam </p>
+        <center><a href=https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results>Source: Kaggle</a></center>
+    </div>
+
+    <div id="container" style="padding-left:10%; width: 800px; height: 500px;"></div>
+
+    <h2 style="text-align: center"><br><br><br>Number & distribution of medals earned </h2>
+
+    <div id="svgdiv" style="padding-left:10%; padding-right:25%"></div>
+
     <script src="linkedviews.js"></script>
 
   </body>
